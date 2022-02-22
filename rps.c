@@ -18,13 +18,13 @@ int main() {
         printf("\nGame Start!\n\n");
         player_score = 0;
         computer_score = 0;
-        againPlay = 0;
+        againPlay = 1;
         do {    // loop a round  until best 2 out of 3 and declare the winner
             srand(time(NULL));
             n = rand() % 100 ;
-            if (n < 33 || n == 33)  computer = 1;
-            if (n > 33 || n < 66)   computer = 2;
-            if (n > 66 || n == 66)  computer = 3; // computer chooses random objects
+            if (n <= 33)  computer = 1;
+            if (n > 33 && n < 66)   computer = 2;
+            if (n >= 66)  computer = 3; // computer chooses random objects
             // prompt user to enter the choice
             printf("Please enter your choice (1=Rock|2=Paper|3=Scissors):  ");
             scanf("%d", &player);
