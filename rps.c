@@ -96,6 +96,6 @@ int main() {
         printf("\nPlay Again?\n"
           "Enter your choice number <1=play again|0=quit>:  ");
         scanf("%d", &againPlay);
-    } while (againPlay == 1);
+    } while (againPlay);
     return 0;
 }
