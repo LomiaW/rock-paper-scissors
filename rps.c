@@ -93,8 +93,7 @@ int main() {
             }
         } while (player_score < 2 && computer_score < 2);
         // prompt user to enter the choice for palying again or not
-        printf("\nPlay Again?\n"
-          "Enter your choice number <1=play again|0=quit>:  ");
+        printf("\nPlay Again?(0=quit)\n");
         scanf("%d", &againPlay);
     } while (againPlay);
     return 0;
