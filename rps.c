@@ -3,85 +3,99 @@
 #include <math.h>
 #include <time.h>
 
-// one Player plays a Rock-Paper-Scissors game with a computer
-
 #define NUM_OBJECTS 3
 
 int main() {
     int player, player_score = 0;
-    int computer, pc_score = 0;
-    int againPlay = 1, n = 0;
+    int computer, computer_score = 0;
+    int againPlay, n = 0;
     
-    printf("\tWelcome! Rock Paper Scissors Game!\n\n");
-    printf("\t\tGame Start!\n\n");
+    printf( "\t+------------------------------------+\n"
+            "\t|Welcome to Rock-Paper-Scissors Game!|\n"
+            "\t+------------------------------------+\n");
     
-    // Main loop for paly again, user enters 1 to continue the game, or 0 to quit 
-    do
-    {
+    do {    // main loop for playing the ganme again
+        printf("\nGame Start!\n\n");
         player_score = 0;
-        pc_score = 0;
-        do
-        {
+        computer_score = 0;
+        againPlay = 0;
+        do {    // loop a round  until best 2 out of 3 and declare the winner
             srand(time(NULL));
             n = rand() % 100 ;
-            if (n < 33)  
-                computer = 1;
-            else if (n > 33 && n < 66)  
-                computer = 2;
-            else computer = 3;
-
-            printf("Please enter your choice (1=Rock, 2=Paper, 3=Scissors):  ");
+            if (n < 33 || n == 33)  computer = 1;
+            if (n > 33 || n < 66)   computer = 2;
+            if (n > 66 || n == 66)  computer = 3; // computer chooses random objects
+            // prompt user to enter the choice
+            printf("Please enter your choice (1=Rock|2=Paper|3=Scissors):  ");
             scanf("%d", &player);
-
-            if (player == computer)
+            // compare player to computer each round and display the result
+            if (player == 1)
             {
-                printf("Tie!\n");
-            } else if (player == 1)
-            {
-                if (computer == 3)
+                switch (computer)
                 {
+                case 3:
                     printf("Rock crushes Scissors. You win!\n");
-                    player_score += 1;
-                } else {
+                    player_score ++; 
+                    break;
+                case 2:
                     printf("Paper covers Rock. You lose.\n");
-                    pc_score += 1;
+                    computer_score ++; 
+                    break;
+                case 1:
+                    printf("Tie!\n"); 
+                    break;
                 }
-            } else if (player == 2)
+            } 
+            if (player == 2)
             {
-                if (computer == 1)
+                switch (computer)
                 {
+                case 1:
                     printf("Paper covers Rock. You win!\n");
-                    player_score += 1;
-                } else {
+                    player_score ++; 
+                    break;
+                case 3:
                     printf("Scissors cuts Paper. You lose.\n");
-                    pc_score += 1;
-                }
-            } else if (player == 3)
+                    computer_score ++; 
+                    break;
+                case 2:
+                    printf("Tie!\n"); 
+                    break;
+                }        
+            }
+            if (player == 3)
             {
-                if (computer == 2)
+                switch (computer)
                 {
+                case 2:
                     printf("Scissors cuts Paper. You win!\n");
-                    player_score += 1;
-                } else {
+                    player_score ++; 
+                    break;
+                case 1:
                     printf("Rock crushes Scissors. You lose.\n");
-                    pc_score += 1;
+                    computer_score ++; 
+                    break;
+                case 3:
+                    printf("Tie!\n");
+                    break;
                 }
             }
-
-            if (player_score == 2 || pc_score == 2)
+            // display the best 2 out of 3 and delcare the winner or loser
+            if (player_score == 2 || computer_score == 2)
             {
+                printf("\nResult: \n");
                 if (player_score == 2)
                 {
                     printf("Best 2 out of 3. You are the winner!\n");
                 } else {
-                    printf("You lose. Thank you for your play.\n");
+                    printf("You lose. Thank you for playing the game.\n");
                 }
             }
-        } while (player_score != 2 && pc_score != 2);
-
-        printf("Play Again?\n"
-          "Enter your choice <1-continue play | 0-quit>:  ");
+        } while (player_score < 2 && computer_score < 2);
+        // prompt user to enter the choice for palying again or not
+        printf("\nPlay Again?\n"
+          "Enter your choice number <1=play again|0=quit>:  ");
         scanf("%d", &againPlay);
-    } while (againPlay = 1);
+    } while (againPlay == 1);
     return 0;
 }
